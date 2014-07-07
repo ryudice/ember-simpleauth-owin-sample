@@ -1,0 +1,1 @@
+﻿App.ApplicationsRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin, {});
