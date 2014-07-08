@@ -23,7 +23,8 @@ namespace EmberJsSimpleAuthOwin
             bundles.Add(new ScriptBundle("~/bundles/ember").Include(
                       "~/Scripts/handlebars.min.js",
                       "~/Scripts/ember.debug.js",
-                      "~/Scripts/ember-simple-auth-0.6.3.js"));
+                      "~/Scripts/ember-simple-auth-0.6.3.js",
+                      "~/Scripts/ember-simple-auth-oauth2-0.6.3.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

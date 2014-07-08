@@ -11,12 +11,31 @@
     
 
     <script type="text/javascript">
+        
+        window.ENV = window.ENV || {};
+        window.ENV['simple-auth'] = {
+            authorizer: 'simple-auth-authorizer:oauth2-bearer'
+        };
+
+        window.ENV['simple-auth-oauth2'] = {
+            serverTokenEndpoint: '/token'
+        }
+
         var App = Ember.Application.create();
 
         App.ApplicationRoute = Ember.Route.extend(SimpleAuth.ApplicationRouteMixin, {});
 
-        App.LoginRoute = Ember.Route.extend( {});
+        App.LoginRoute = Ember.Route.extend({});
+
+        App.LoginController = Ember.Controller.extend(SimpleAuth.LoginControllerMixin, {
+            authenticator: 'simple-auth-authenticator:oauth2-password-grant'
+        });
+
         App.IndexRoute = Ember.Route.extend(SimpleAuth.AuthenticatedRouteMixin, {});
+      
+        App.Router.map(function () {
+            this.route('login');
+        });
     </script>
     <script type="text/x-handlebars" data-template-name="index">
         <h2>Index</h2>
@@ -25,7 +44,13 @@
     
     <script type="text/x-handlebars" data-template-name="login">
         <h2>Login</h2>
-       
+        <form {{action 'authenticate' on='submit' }}>
+            <label for="identification">Login</label>
+            {{input id='identification' placeholder='Enter Login' value=identification}}
+            <label for="password">Password</label>
+            {{input id='password' placeholder='Enter Password' type='password' value=password}}
+            <button type="submit">Login</button>
+        </form>
     </script>
 </head>
 <body>
